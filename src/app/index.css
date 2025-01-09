@@ -1,0 +1,89 @@
+@import "../pages/Home/config/index.css";
+@import "../widgets/ProductsList/config/index.css";
+@import "../entities/Product/config/index.css";
+@import "../shared/lib/normalize.css";
+@import "../shared/config/index.css";
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fade-skeleton {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .35;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#app {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.skeleton--fade::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    animation: fade-skeleton 2s infinite;
+    background-color: rgba(229, 228, 226, .5);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.skeleton::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+    background-image: linear-gradient(to right, transparent, rgba(229, 228, 226, .5), transparent);
+    overflow: hidden;
+    isolation: isolate;
+    border-top: 1px solid rgba(229, 228, 226, .3);
+}
+
+.btn {
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    transition: opacity 0.2s linear;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn--variant--toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+    background-color: blue;
+
+    color: white;
+
+    padding: 8px 16px;
+}
