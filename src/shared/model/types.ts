@@ -1,6 +1,7 @@
+import { UPDATE_TYPES } from "@/pages/Home";
 import { ApiException } from "../api/exception";
 
-export type ObserverSubscriber = <T>(updateType: string, data: T) => void;
+export type ObserverSubscriber = <T>(updateType: UPDATE_TYPES, data: T) => void;
 export type RequestOptionsWithoutBody = Omit<RequestOptions, 'body'>;
 export type RequestBody = Record<string, any> | FormData | string; 
 export type InterceptorResponseSuccessFunction = <T>(response: ApiBaseResult<T>) => ApiBaseResult<T>['data'] | Promise<ApiBaseResult<T>['data']>
@@ -9,13 +10,17 @@ export type InterceptorRequestSuccessFunction = (options: RequestConfig) => Requ
 export type InterceptorRequestFailureFunction = (error: ApiException) => any;
 export type ApiSearchParams = Record<string, undefined | null | string | number | boolean | Array<string | number | boolean>>;
 
+export enum LOCAL_STORAGE_KEYS {
+    FAVORITES = 'favorites'
+}
+
 export interface ModalConfig {
     id?: string;
     title?: string;
     withCloseButton?: boolean;
     withHeader?: boolean;
     bodyClassName?: string;
-    content: string;
+    content: HTMLElement;
     closeHandler?: (modal?: ModalConfig) => void;
 }
 

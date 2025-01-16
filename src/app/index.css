@@ -1,7 +1,7 @@
 @import "../pages/Home/config/index.css";
 @import "../widgets/ProductsList/config/index.css";
 @import "../entities/Product/config/index.css";
-@import "../shared/lib/normalize.css";
+@import "../shared/lib/vendor/normalize.css";
 @import "../shared/config/index.css";
 
 @keyframes shimmer {
@@ -23,6 +23,15 @@
     100% {
         opacity: 1;
     }
+}
+
+:root {
+    font-family: Inter, "sans-serif";
+}
+
+.body--no-scroll {
+    overflow: hidden;
+    padding-right: var(--scrollbar-size);
 }
 
 #app {
@@ -63,6 +72,7 @@
     outline: none;
     background-color: transparent;
     cursor: pointer;
+    white-space: nowrap;
 
     transition: opacity 0.2s linear;
 }

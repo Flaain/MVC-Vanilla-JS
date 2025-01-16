@@ -1,12 +1,12 @@
 import { IView } from "../model/types";
 
 export abstract class View<T extends HTMLElement = HTMLElement> implements IView {
-    protected element: T;
-    readonly callbacks: Record<string, Function>;
+    public element: T;
+    readonly callbacks: Record<string, (...args: any) => any>;
 
     constructor(
         private readonly tag: keyof HTMLElementTagNameMap,
-        private parent?: HTMLElement,
+        public parent?: HTMLElement,
         private readonly classes?: string | Array<string>
     ) {
         this.element = this.create(tag, classes);
@@ -32,11 +32,11 @@ export abstract class View<T extends HTMLElement = HTMLElement> implements IView
         return element as T;
     }
 
-    protected render() {
+    protected render(insertPosition: 'beforeend' | 'afterbegin' = 'beforeend') {
         if (!this.parent) throw new Error("Parent element not found");
         
         !this.element && this.recreate();
-        this.parent.append(this.element);
+        this.parent[insertPosition === 'afterbegin' ? 'prepend' : 'append'](this.element);
     }
 
     remove() {

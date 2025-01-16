@@ -6,6 +6,7 @@ export type IHomeview = "products" | "favorites";
 export interface HomeState {
     view: IHomeview;
     isLoading: boolean;
+    favorites: Array<Product>;
     products: WithMeta<Product> | null;
 }
 

@@ -7,6 +7,7 @@ export class ImageView extends View<HTMLImageElement> {
     private readonly loading: HTMLImageElement['loading'];
     private readonly alt?: string;
     private readonly onImageLoad?: () => void;
+    private readonly insertPosition: "afterbegin" | "beforeend";
 
     constructor({
         src,
@@ -15,6 +16,7 @@ export class ImageView extends View<HTMLImageElement> {
         classes,
         alt,
         loading = 'lazy',
+        insertPosition = "afterbegin",
         onImageLoad
     }: {
         src?: string;
@@ -24,11 +26,13 @@ export class ImageView extends View<HTMLImageElement> {
         parent: HTMLElement;
         classes?: string | Array<string>;
         onImageLoad?: () => void;
+        insertPosition?: "afterbegin" | "beforeend";
     }) {
         super("img", parent, classes);
 
         this.src = src;
         this.alt = alt;
+        this.insertPosition = insertPosition;
         this.container = parent;
         this.loading = loading;
         this.skeleton = skeleton;
@@ -56,7 +60,7 @@ export class ImageView extends View<HTMLImageElement> {
     }
 
     init() {
-        this.skeleton && this.container.insertAdjacentHTML('afterbegin', `<div class="imageview__skeleton">${this.skeleton}</div>`);
+        this.skeleton && this.container.insertAdjacentHTML(this.insertPosition, `<div class="imageview__skeleton">${this.skeleton}</div>`);
         
         if (!this.src) return;
 
@@ -76,6 +80,6 @@ export class ImageView extends View<HTMLImageElement> {
         `;
         
         this.setListeners();
-        this.render();
+        this.render(this.insertPosition);
     }
 }

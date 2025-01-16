@@ -1,5 +1,6 @@
 import { ObserverSubscriber } from "@/shared/model/types";
 import { HomeModel } from "./model";
+import { Product } from "@/entities/Product";
 
 export class HomeController {
     private readonly model: HomeModel;
@@ -10,6 +11,14 @@ export class HomeController {
 
     get state() {
         return this.model.state;
+    }
+
+    isFavorite(_id: number) {
+        return this.model.isFavorite(_id);
+    }
+
+    handleFavoriteClick(product: Product) {
+        this.model.handleFavoriteClick(product);
     }
 
     abortProducts(reason?: string) {
@@ -30,5 +39,9 @@ export class HomeController {
 
     unsubscribe(subscriber: ObserverSubscriber) {
         this.model.unsubscribe(subscriber);
+    }
+
+    getFavorites() {
+        return this.model.getFavorites();
     }
 }

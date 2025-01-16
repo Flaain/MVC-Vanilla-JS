@@ -5,6 +5,26 @@
     gap: 10px;
 }
 
+.home__empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+
+    gap: 10px;
+}
+
+.home__empty-title {
+    margin: 0;
+}
+
+.home__empty > svg {
+    width: 40px;
+    height: 40px;
+}
+
 .home__content {
     display: flex;
     gap: 20px;
@@ -28,7 +48,7 @@
 
 .home__toolbar-btn--favorites {
     margin-left: auto !important;
-    max-width: 180px;
+    max-width: 200px;
     width: 100%;
 }
 
